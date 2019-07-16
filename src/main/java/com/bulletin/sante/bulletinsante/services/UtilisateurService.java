@@ -1,7 +1,5 @@
 package com.bulletin.sante.bulletinsante.services;
 
-import com.bulletin.sante.bulletinsante.DTO.UtilisateurDTO;
-import com.bulletin.sante.bulletinsante.models.Profile;
 import com.bulletin.sante.bulletinsante.models.Utilisateur;
 import com.bulletin.sante.bulletinsante.repositories.UtilisateurRepository;
 import org.springframework.stereotype.Service;
@@ -33,9 +31,9 @@ public class UtilisateurService {
         } else return null;
     }
 
-    public boolean addUser(UtilisateurDTO utilisateurDTO) {
+    public boolean addUser(Utilisateur utilisateur) {
         try {
-            Utilisateur utilisateur = new Utilisateur();
+           /* Utilisateur utilisateur = new Utilisateur();
             utilisateur.setEmail(utilisateurDTO.getEmail());
             utilisateur.setPassword(utilisateurDTO.getPassword());
             Profile profile = new Profile();
@@ -46,8 +44,8 @@ public class UtilisateurService {
             utilisateur.setNom(utilisateurDTO.getNom());
             utilisateur.setPrenom(utilisateurDTO.getPrenom());
             utilisateur.setTelephone(utilisateurDTO.getTelephone());
-            Utilisateur utilisateur1 = utilisateurRepository.getUtilisateurByEmail(utilisateur.getEmail()).orElse(null);
-            if (utilisateur1 == null) {
+            Utilisateur utilisateur1 = utilisateurRepository.getUtilisateurByEmail(utilisateur.getEmail()).orElse(null);*/
+            if (utilisateur != null) {
                 utilisateur.setConnected(false);
                 utilisateurRepository.save(utilisateur);
             } else return false;

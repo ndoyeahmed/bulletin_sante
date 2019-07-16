@@ -1,6 +1,5 @@
 package com.bulletin.sante.bulletinsante.rest;
 
-import com.bulletin.sante.bulletinsante.DTO.UtilisateurDTO;
 import com.bulletin.sante.bulletinsante.models.Utilisateur;
 import com.bulletin.sante.bulletinsante.services.UtilisateurService;
 import org.springframework.http.HttpStatus;
@@ -30,9 +29,9 @@ public class UtilisateurController {
     }
 
     @PostMapping("/add-user")
-    public ResponseEntity addUser(@RequestBody UtilisateurDTO utilisateurDTO) {
+    public ResponseEntity addUser(@RequestBody Utilisateur utilisateur) {
         try {
-            return new ResponseEntity<>(Collections.singletonMap("success", utilisateurService.addUser(utilisateurDTO)), HttpStatus.OK);
+            return new ResponseEntity<>(Collections.singletonMap("success", utilisateurService.addUser(utilisateur)), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
