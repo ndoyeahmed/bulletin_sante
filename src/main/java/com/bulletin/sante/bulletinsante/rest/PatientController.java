@@ -2,6 +2,7 @@ package com.bulletin.sante.bulletinsante.rest;
 
 import com.bulletin.sante.bulletinsante.DTO.PatientDTO;
 import com.bulletin.sante.bulletinsante.services.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,11 +12,8 @@ import java.util.Collections;
 @RequestMapping("/api")
 public class PatientController {
 
-    private final PatientService patientService;
-
-    public PatientController(PatientService patientService) {
-        this.patientService = patientService;
-    }
+    @Autowired
+    private PatientService patientService;
 
     @GetMapping("/all-patient")
     public ResponseEntity allPatient() {

@@ -3,6 +3,7 @@ package com.bulletin.sante.bulletinsante.services;
 import com.bulletin.sante.bulletinsante.DTO.RendezVousDTO;
 import com.bulletin.sante.bulletinsante.models.RendezVous;
 import com.bulletin.sante.bulletinsante.repositories.RendezVousRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,11 +14,8 @@ import java.util.List;
 @Transactional
 public class RendezVousService {
 
-    private final RendezVousRepository rendezVousRepository;
-
-    public RendezVousService(RendezVousRepository rendezVousRepository) {
-        this.rendezVousRepository = rendezVousRepository;
-    }
+    @Autowired
+    private RendezVousRepository rendezVousRepository;
 
     public List<RendezVous> allRendezVous() {
         try {

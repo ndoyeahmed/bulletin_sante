@@ -2,6 +2,7 @@ package com.bulletin.sante.bulletinsante.services;
 
 import com.bulletin.sante.bulletinsante.models.Utilisateur;
 import com.bulletin.sante.bulletinsante.repositories.UtilisateurRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +17,8 @@ public class UtilisateurService {
 
     private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    private final UtilisateurRepository utilisateurRepository;
-
-    public UtilisateurService(UtilisateurRepository utilisateurRepository) {
-        this.utilisateurRepository = utilisateurRepository;
-    }
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
 
     public Utilisateur login(String email, String password) {
         Utilisateur utilisateur = utilisateurRepository.getUtilisateurByEmailAndPassword(email, password).orElse(null);

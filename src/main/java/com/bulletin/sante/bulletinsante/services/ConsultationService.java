@@ -3,6 +3,7 @@ package com.bulletin.sante.bulletinsante.services;
 import com.bulletin.sante.bulletinsante.DTO.ConsultationDTO;
 import com.bulletin.sante.bulletinsante.models.Consultation;
 import com.bulletin.sante.bulletinsante.repositories.ConsultationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,11 +13,9 @@ import java.util.List;
 @Service
 @Transactional
 public class ConsultationService {
-    private final ConsultationRepository consultationRepository;
+    @Autowired
+    private ConsultationRepository consultationRepository;
 
-    public ConsultationService(ConsultationRepository consultationRepository) {
-        this.consultationRepository = consultationRepository;
-    }
 
     public List<Consultation> allConsultation() {
         try {

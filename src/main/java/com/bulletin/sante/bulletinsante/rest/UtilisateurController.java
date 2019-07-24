@@ -2,6 +2,7 @@ package com.bulletin.sante.bulletinsante.rest;
 
 import com.bulletin.sante.bulletinsante.models.Utilisateur;
 import com.bulletin.sante.bulletinsante.services.UtilisateurService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +13,8 @@ import java.util.Collections;
 @RestController
 @RequestMapping("/api")
 public class UtilisateurController {
-    private final UtilisateurService utilisateurService;
-
-    public UtilisateurController(UtilisateurService utilisateurService) {
-        this.utilisateurService = utilisateurService;
-    }
-
+    @Autowired
+    private UtilisateurService utilisateurService;
 
     @GetMapping("/all-user")
     public ResponseEntity allUser() {

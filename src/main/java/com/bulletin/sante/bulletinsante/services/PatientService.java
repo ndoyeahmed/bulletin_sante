@@ -3,6 +3,7 @@ package com.bulletin.sante.bulletinsante.services;
 import com.bulletin.sante.bulletinsante.DTO.PatientDTO;
 import com.bulletin.sante.bulletinsante.models.Patient;
 import com.bulletin.sante.bulletinsante.repositories.PatientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,11 +14,8 @@ import java.util.List;
 @Transactional
 public class PatientService {
 
-    private final PatientRepository patientRepository;
-
-    public PatientService(PatientRepository patientRepository) {
-        this.patientRepository = patientRepository;
-    }
+    @Autowired
+    private PatientRepository patientRepository;
 
     public boolean addOrUpdatePatient(PatientDTO patientDTO) {
         try {

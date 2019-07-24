@@ -4,6 +4,7 @@ import com.bulletin.sante.bulletinsante.DTO.ConsultationDTO;
 import com.bulletin.sante.bulletinsante.DTO.RendezVousDTO;
 import com.bulletin.sante.bulletinsante.services.ConsultationService;
 import com.bulletin.sante.bulletinsante.services.RendezVousService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,15 +21,11 @@ import java.util.Collections;
 @RequestMapping("/api")
 public class ConsultationController {
 
-    private final ConsultationService consultationService;
+    @Autowired
+    private ConsultationService consultationService;
 
-    private final RendezVousService rendezVousService;
-
-    // make an constructor injection for services
-    public ConsultationController(ConsultationService consultationService, RendezVousService rendezVousService) {
-        this.consultationService = consultationService;
-        this.rendezVousService = rendezVousService;
-    }
+    @Autowired
+    private RendezVousService rendezVousService;
 
     /**
      * End point that provide a list of consultation
