@@ -3,6 +3,7 @@ package com.bulletin.sante.bulletinsante.rest;
 import com.bulletin.sante.bulletinsante.AbstractTest;
 import com.bulletin.sante.bulletinsante.models.Profile;
 import com.bulletin.sante.bulletinsante.models.Utilisateur;
+import com.bulletin.sante.bulletinsante.utils.Utilitaire;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
@@ -58,7 +59,7 @@ public class UtilisateurControllerTest extends AbstractTest {
         int status = mvcResult.getResponse().getStatus();
         assertEquals(200, status);
         String content = mvcResult.getResponse().getContentAsString();
-        assertEquals(content, super.mapToJson(Collections.singletonMap("success", true)));
+        assertEquals(content, super.mapToJson(Collections.singletonMap(Utilitaire.SUCCESS_CODE, true)));
     }
 
     @Test
@@ -75,6 +76,6 @@ public class UtilisateurControllerTest extends AbstractTest {
         int status = mvcResult.getResponse().getStatus();
         assertEquals(400, status);
         String content = mvcResult.getResponse().getContentAsString();
-        assertEquals(content, "error");
+        assertEquals(Utilitaire.ERROR_CODE, content);
     }
 }

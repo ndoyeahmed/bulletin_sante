@@ -15,9 +15,6 @@ import java.util.Collections;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    private static final String CLIENT_SECRET = "secret";
-    private static final String CLIENT_ID = "1";
-    private static final String AUTH_SERVER = "/";
 
     @Bean
     public Docket api() {
