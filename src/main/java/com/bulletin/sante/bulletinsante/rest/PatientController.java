@@ -1,7 +1,8 @@
 package com.bulletin.sante.bulletinsante.rest;
 
-import com.bulletin.sante.bulletinsante.DTO.PatientDTO;
+import com.bulletin.sante.bulletinsante.models.Patient;
 import com.bulletin.sante.bulletinsante.services.PatientService;
+import com.bulletin.sante.bulletinsante.utils.Utilitaire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,19 +27,39 @@ public class PatientController {
     }
 
     @PostMapping("/add-patient")
-    public ResponseEntity addOrUpdatePatient(@RequestBody PatientDTO patientDTO) {
+    public ResponseEntity addOrUpdatePatient(@RequestBody Patient patient) {
         try {
-            return ResponseEntity.ok(Collections.singletonMap("success", patientService.addOrUpdatePatient(patientDTO)));
+            if (patientService.addOrUpdatePatient(patient)) {
+                return ResponseEntity.ok(Collections.singletonMap(Utilitaire.SUCCESS_CODE, true));
+            } else {
+                return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, false));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
         }
     }
 
-    @GetMapping("/get-patient/{id}")
+    @PostMapping("/update-patient")
+    public ResponseEntity updatePatient(@RequestBody Patient patient) {
+        try {
+            if (patientService.addOrUpdatePatient(patient)) {
+                return ResponseEntity.ok(Collections.singletonMap(Utilitaire.SUCCESS_CODE, true));
+            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, false));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PutMapping("/get-patient/{id}")
     public ResponseEntity getPatientById(@PathVariable("id") Long id) {
         try {
-            return ResponseEntity.ok(patientService.getPatientById(id));
+            Patient patient = patientService.getPatientById(id);
+            if (patient != null) {
+                return ResponseEntity.ok(Collections.singletonMap(Utilitaire.SUCCESS_CODE, patient));
+            } else {
+                return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, null));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();

@@ -1,12 +1,13 @@
 package com.bulletin.sante.bulletinsante.services;
 
-import com.bulletin.sante.bulletinsante.DTO.ConsultationDTO;
 import com.bulletin.sante.bulletinsante.models.Consultation;
 import com.bulletin.sante.bulletinsante.repositories.ConsultationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,21 +27,16 @@ public class ConsultationService {
         }
     }
 
-    public boolean addConsultation(ConsultationDTO consultationDTO) {
+    public boolean addConsultation(Consultation consultation) {
         try {
-            if (consultationDTO != null && !consultationDTO.getDiagnostic().equals("")
-                    && consultationDTO.getDateConsultation() != null && consultationDTO.getRendezVous() != null
-                    && consultationDTO.getUtilisateur() != null) {
-                Consultation consultation = new Consultation();
-                if (consultationDTO.getId() != null && consultationDTO.getId() != 0)
-                    consultation.setId(consultationDTO.getId());
-                consultation.setDateConsultation(consultationDTO.getDateConsultation());
-                consultation.setDiagnostic(consultationDTO.getDiagnostic());
-                consultation.setUtilisateur(consultationDTO.getUtilisateur());
-                consultation.setRendezVous(consultationDTO.getRendezVous());
+            if (!consultation.getDiagnostic().equals("") && consultation.getRendezVous() != null
+                    && consultation.getUtilisateur() != null) {
+                consultation.setDateConsultation(Timestamp.valueOf(LocalDateTime.now()));
                 consultationRepository.save(consultation);
                 return true;
-            } else return false;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;

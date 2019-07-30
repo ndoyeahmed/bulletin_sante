@@ -1,6 +1,8 @@
 package com.bulletin.sante.bulletinsante.services;
 
+import com.bulletin.sante.bulletinsante.models.Profile;
 import com.bulletin.sante.bulletinsante.models.Utilisateur;
+import com.bulletin.sante.bulletinsante.repositories.ProfileRepository;
 import com.bulletin.sante.bulletinsante.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ public class UtilisateurService {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
 
+    @Autowired
+    private ProfileRepository profileRepository;
+
     public Utilisateur login(String email, String password) {
         Utilisateur utilisateur = utilisateurRepository.getUtilisateurByEmailAndPassword(email, password).orElse(null);
         if (utilisateur != null) {
@@ -31,18 +36,6 @@ public class UtilisateurService {
 
     public boolean addUser(Utilisateur utilisateur) {
         try {
-           /* Utilisateur utilisateur = new Utilisateur();
-            utilisateur.setEmail(utilisateurDTO.getEmail());
-            utilisateur.setPassword(utilisateurDTO.getPassword());
-            Profile profile = new Profile();
-            profile.setId(utilisateurDTO.getProfile().getId());
-            profile.setLibelle(utilisateurDTO.getProfile().getLibelle());
-            utilisateur.setProfile(profile);
-            utilisateur.setAdresse(utilisateurDTO.getAdresse());
-            utilisateur.setNom(utilisateurDTO.getNom());
-            utilisateur.setPrenom(utilisateurDTO.getPrenom());
-            utilisateur.setTelephone(utilisateurDTO.getTelephone());
-            Utilisateur utilisateur1 = utilisateurRepository.getUtilisateurByEmail(utilisateur.getEmail()).orElse(null);*/
             if (utilisateur != null) {
                 utilisateur.setConnected(false);
                 utilisateurRepository.save(utilisateur);
@@ -69,6 +62,26 @@ public class UtilisateurService {
         } catch (Exception e) {
             LOGGER.log(Level.INFO, e.getMessage());
             return null;
+        }
+    }
+
+    public boolean updateUser(Utilisateur utilisateur) {
+        try {
+            if (utilisateur != null && utilisateur.getId() != null) {
+                utilisateurRepository.save(utilisateur);
+                return true;
+            } else return false;
+        } catch (Exception e) {
+            LOGGER.log(Level.INFO, e.getMessage());
+            return false;
+        }
+    }
+
+    public List<Profile> allProfile() {
+        try {
+            return profileRepository.findAll();
+        } catch (Exception e) {
+            return new ArrayList<>();
         }
     }
 }

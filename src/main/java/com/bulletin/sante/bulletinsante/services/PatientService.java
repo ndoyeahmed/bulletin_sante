@@ -1,6 +1,5 @@
 package com.bulletin.sante.bulletinsante.services;
 
-import com.bulletin.sante.bulletinsante.DTO.PatientDTO;
 import com.bulletin.sante.bulletinsante.models.Patient;
 import com.bulletin.sante.bulletinsante.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +16,10 @@ public class PatientService {
     @Autowired
     private PatientRepository patientRepository;
 
-    public boolean addOrUpdatePatient(PatientDTO patientDTO) {
+    public boolean addOrUpdatePatient(Patient patient) {
         try {
-            if (patientDTO != null && !patientDTO.getNom().equals("") && !patientDTO.getPrenom().equals("")
-                    && !patientDTO.getTelephone().equals("")) {
-                Patient patient = new Patient();
-                if (patientDTO.getId() != null && patientDTO.getId() != 0)
-                    patient.setId(patientDTO.getId());
-                patient.setGenre(patientDTO.getGenre());
-                patient.setAdresse(patientDTO.getAdresse());
-                patient.setNom(patientDTO.getNom());
-                patient.setPrenom(patientDTO.getPrenom());
-                patient.setTelephone(patientDTO.getTelephone());
+            if (!patient.getAdresse().equals("") && !patient.getNom().equals("")
+                    && !patient.getPrenom().equals("") && !patient.getTelephone().equals("")) {
                 patientRepository.save(patient);
                 return true;
             } else return false;

@@ -1,6 +1,5 @@
 package com.bulletin.sante.bulletinsante.services;
 
-import com.bulletin.sante.bulletinsante.DTO.RendezVousDTO;
 import com.bulletin.sante.bulletinsante.models.RendezVous;
 import com.bulletin.sante.bulletinsante.repositories.RendezVousRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +25,12 @@ public class RendezVousService {
         }
     }
 
-    public boolean addRendezVous(RendezVousDTO rendezVousDTO) {
+    public boolean addRendezVous(RendezVous rendezVous) {
         try {
-            if (rendezVousDTO.getDateRendezVous() != null && rendezVousDTO.getPatient() != null) {
-                RendezVous rendezVous = new RendezVous();
-                rendezVous.setDateRendezVous(rendezVousDTO.getDateRendezVous());
-                rendezVous.setPatient(rendezVousDTO.getPatient());
+            if (rendezVous.getDateRendezVous() != null && rendezVous.getPatient() != null) {
                 rendezVousRepository.save(rendezVous);
                 return true;
-            } else {
-                return false;
-            }
+            } else return false;
         } catch (Exception e) {
             e.printStackTrace();
             return false;

@@ -2,6 +2,7 @@ package com.bulletin.sante.bulletinsante.rest;
 
 import com.bulletin.sante.bulletinsante.models.Utilisateur;
 import com.bulletin.sante.bulletinsante.services.UtilisateurService;
+import com.bulletin.sante.bulletinsante.utils.Utilitaire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,14 +26,32 @@ public class UtilisateurController {
         }
     }
 
+    @GetMapping("/all-profile")
+    public ResponseEntity allProfile() {
+        try {
+            return ResponseEntity.ok(utilisateurService.allProfile());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, null));
+        }
+    }
+
     @PostMapping("/add-user")
     public ResponseEntity addUser(@RequestBody Utilisateur utilisateur) {
         try {
-            return new ResponseEntity<>(Collections.singletonMap("success", utilisateurService.addUser(utilisateur)), HttpStatus.OK);
+            if (utilisateurService.addUser(utilisateur)) {
+                return ResponseEntity.ok(Collections.singletonMap(Utilitaire.SUCCESS_CODE, true));
+            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, false));
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(Utilitaire.ERROR_CODE, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PutMapping("/update-user")
+    public ResponseEntity updateUser(@RequestBody Utilisateur utilisateur) {
+        if (utilisateurService.updateUser(utilisateur)) {
+            return ResponseEntity.ok(Collections.singletonMap(Utilitaire.SUCCESS_CODE, true));
+        } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, false));
     }
 
     @PostMapping("/login")
@@ -40,19 +59,27 @@ public class UtilisateurController {
         try {
             Utilisateur utilisateur = utilisateurService.login(userLoginModel.getEmail(), userLoginModel.getPassword());
             if (utilisateur != null)
-                return new ResponseEntity<>(utilisateur, HttpStatus.OK);
+                return ResponseEntity.ok(Collections.singletonMap(Utilitaire.SUCCESS_CODE, utilisateur));
             else
-                return new ResponseEntity<>("error", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>(Utilitaire.ERROR_CODE, HttpStatus.FORBIDDEN);
         } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, HttpStatus.BAD_REQUEST));
         }
     }
 
-    private class UserLoginModel {
+    @GetMapping("/get-user-by-id/{id}")
+    public ResponseEntity getUserById(@PathVariable("id") Long id) {
+        Utilisateur utilisateur = utilisateurService.getUserById(id);
+        if (utilisateur != null) {
+            return ResponseEntity.ok(Collections.singletonMap(Utilitaire.SUCCESS_CODE, utilisateur));
+        } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, null));
+    }
+
+    private static class UserLoginModel {
         private String email;
         private String password;
 
-        public String getEmail() {
+        String getEmail() {
             return email;
         }
 
@@ -60,7 +87,7 @@ public class UtilisateurController {
             this.email = email;
         }
 
-        public String getPassword() {
+        String getPassword() {
             return password;
         }
 

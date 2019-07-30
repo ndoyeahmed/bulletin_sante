@@ -1,9 +1,10 @@
 package com.bulletin.sante.bulletinsante.rest;
 
-import com.bulletin.sante.bulletinsante.DTO.ConsultationDTO;
-import com.bulletin.sante.bulletinsante.DTO.RendezVousDTO;
+import com.bulletin.sante.bulletinsante.models.Consultation;
+import com.bulletin.sante.bulletinsante.models.RendezVous;
 import com.bulletin.sante.bulletinsante.services.ConsultationService;
 import com.bulletin.sante.bulletinsante.services.RendezVousService;
+import com.bulletin.sante.bulletinsante.utils.Utilitaire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,18 +48,20 @@ public class ConsultationController {
      * End point that provide adding a consultation
      * It can be access in POST request
      *
-     * @param consultationDTO Consultation DTO Object to add
+     * @param consultation Consultation Object to add
      * @return Return a singleton map
      * success and true if all ok
      * error and false if there is problem in request
      */
     @PostMapping("/add-consultation")
-    public ResponseEntity addConsultation(@RequestBody ConsultationDTO consultationDTO) {
+    public ResponseEntity addConsultation(@RequestBody Consultation consultation) {
         try {
-            return ResponseEntity.ok(Collections.singletonMap("success", consultationService.addConsultation(consultationDTO)));
+            if (consultationService.addConsultation(consultation)) {
+                return ResponseEntity.ok(Collections.singletonMap(Utilitaire.SUCCESS_CODE, true));
+            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, false));
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.badRequest().body(Collections.singletonMap("success", false));
+            return ResponseEntity.badRequest().build();
         }
     }
 
@@ -72,7 +75,10 @@ public class ConsultationController {
     @GetMapping("/get-consultation/{id}")
     public ResponseEntity getConsultationById(@PathVariable("id") Long id) {
         try {
-            return ResponseEntity.ok(consultationService.getConsultationById(id));
+            Consultation consultation = consultationService.getConsultationById(id);
+            if (consultation != null) {
+                return ResponseEntity.ok(Collections.singletonMap(Utilitaire.SUCCESS_CODE, consultation));
+            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, null));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
@@ -99,16 +105,18 @@ public class ConsultationController {
      * End point that provide adding a RendezVous
      * It can be access in POST request
      *
-     * @param rendezVousDTO RendezVous DTO to add
+     * @param rendezVous RendezVous to add
      * @return return a singleton map ({"success", true} or {"error", false})
      */
     @PostMapping("/add-rendez-vous")
-    public ResponseEntity addRendezVous(@RequestBody RendezVousDTO rendezVousDTO) {
+    public ResponseEntity addRendezVous(@RequestBody RendezVous rendezVous) {
         try {
-            return ResponseEntity.ok(Collections.singletonMap("success", rendezVousService.addRendezVous(rendezVousDTO)));
+            if (rendezVousService.addRendezVous(rendezVous)) {
+                return ResponseEntity.ok(Collections.singletonMap(Utilitaire.SUCCESS_CODE, true));
+            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, false));
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.badRequest().body(Collections.singletonMap("error", false));
+            return ResponseEntity.badRequest().build();
         }
     }
 
@@ -122,7 +130,10 @@ public class ConsultationController {
     @GetMapping("/get-rendez-vous/{id}")
     public ResponseEntity getRendezVousById(@PathVariable("id") Long id) {
         try {
-            return ResponseEntity.ok(consultationService.getConsultationById(id));
+            RendezVous rendezVous = rendezVousService.getRendezVousById(id);
+            if (rendezVous != null) {
+                return ResponseEntity.ok(Collections.singletonMap(Utilitaire.SUCCESS_CODE, rendezVous));
+            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, null));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
