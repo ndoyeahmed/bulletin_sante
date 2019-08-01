@@ -36,7 +36,9 @@ public class UtilisateurService {
 
     public boolean addUser(Utilisateur utilisateur) {
         try {
-            if (utilisateur != null) {
+            if (utilisateur != null && utilisateur.getId() != null && !utilisateur.getEmail().equals("")
+                    && !utilisateur.getAdresse().equals("") && !utilisateur.getNom().equals("")
+                    && !utilisateur.getPrenom().equals("") && !utilisateur.getTelephone().equals("")) {
                 utilisateur.setConnected(false);
                 utilisateurRepository.save(utilisateur);
             } else return false;
