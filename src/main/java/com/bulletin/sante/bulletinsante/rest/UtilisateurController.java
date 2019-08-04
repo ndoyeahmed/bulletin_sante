@@ -61,7 +61,7 @@ public class UtilisateurController {
             if (utilisateur != null)
                 return ResponseEntity.ok(Collections.singletonMap(Utilitaire.SUCCESS_CODE, utilisateur));
             else
-                return new ResponseEntity<>(Utilitaire.ERROR_CODE, HttpStatus.FORBIDDEN);
+                return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, HttpStatus.FORBIDDEN));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, HttpStatus.BAD_REQUEST));
         }

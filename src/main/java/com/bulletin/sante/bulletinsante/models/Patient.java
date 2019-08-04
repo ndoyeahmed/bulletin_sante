@@ -11,6 +11,7 @@ public class Patient extends Personne implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String cin;
     private char genre;
 
     public Patient() {
@@ -31,5 +32,13 @@ public class Patient extends Personne implements Serializable {
 
     public void setGenre(char genre) {
         this.genre = genre;
+    }
+
+    public String getCin() {
+        return cin;
+    }
+
+    public void setCin(String cin) {
+        this.cin = cin;
     }
 }
