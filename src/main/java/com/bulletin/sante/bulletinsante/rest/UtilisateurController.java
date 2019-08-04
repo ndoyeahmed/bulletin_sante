@@ -63,6 +63,7 @@ public class UtilisateurController {
             else
                 return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, HttpStatus.FORBIDDEN));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest().body(Collections.singletonMap(Utilitaire.ERROR_CODE, HttpStatus.BAD_REQUEST));
         }
     }
