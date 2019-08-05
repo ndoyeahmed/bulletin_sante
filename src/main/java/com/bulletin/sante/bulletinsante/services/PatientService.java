@@ -20,6 +20,7 @@ public class PatientService {
         try {
             if (!patient.getAdresse().equals("") && !patient.getNom().equals("")
                     && !patient.getPrenom().equals("") && !patient.getTelephone().equals("")) {
+                patient.setNomComplet(patient.getNom() + " " + patient.getPrenom());
                 patientRepository.save(patient);
                 return true;
             } else return false;

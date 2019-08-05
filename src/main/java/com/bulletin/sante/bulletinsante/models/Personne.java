@@ -1,14 +1,12 @@
 package com.bulletin.sante.bulletinsante.models;
 
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
 import java.io.Serializable;
 
 @MappedSuperclass
 public class Personne implements Serializable {
     protected String nom;
     protected String prenom;
-    @Transient
     protected String nomComplet;
     protected String telephone;
     protected String adresse;

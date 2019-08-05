@@ -40,6 +40,7 @@ public class UtilisateurService {
                     && !utilisateur.getAdresse().equals("") && !utilisateur.getNom().equals("")
                     && !utilisateur.getPrenom().equals("") && !utilisateur.getTelephone().equals("")) {
                 utilisateur.setConnected(false);
+                utilisateur.setNomComplet(utilisateur.getNom() + " " + utilisateur.getPrenom());
                 utilisateurRepository.save(utilisateur);
             } else return false;
             return true;
