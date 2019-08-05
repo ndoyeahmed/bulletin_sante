@@ -9,6 +9,7 @@ public class RendezVous implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String libelle;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateRendezVous;
     @ManyToOne
@@ -37,5 +38,13 @@ public class RendezVous implements Serializable {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
     }
 }
