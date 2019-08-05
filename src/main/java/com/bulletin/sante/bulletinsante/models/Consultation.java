@@ -10,6 +10,7 @@ public class Consultation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String diagnostic;
+    private String prescription;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateConsultation;
     @ManyToOne
@@ -57,5 +58,13 @@ public class Consultation implements Serializable {
 
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
+    }
+
+    public String getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(String prescription) {
+        this.prescription = prescription;
     }
 }
