@@ -45,4 +45,13 @@ public class RendezVousService {
             return null;
         }
     }
+
+    public List<RendezVous> getAllByPatientId(Long id) {
+        try {
+            return rendezVousRepository.getAllByPatient_Id(id).orElse(new ArrayList<>());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
 }

@@ -140,4 +140,14 @@ public class ConsultationController {
         }
     }
 
+    @GetMapping("/get-rv-patient/{id}")
+    public ResponseEntity getAllRVByPatientId(@PathVariable("id") Long id) {
+        try {
+            return ResponseEntity.ok(rendezVousService.getAllByPatientId(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 }
