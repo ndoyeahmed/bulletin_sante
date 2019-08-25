@@ -1,5 +1,7 @@
 package com.bulletin.sante.bulletinsante;
 
+import com.bulletin.sante.bulletinsante.models.Profile;
+import com.bulletin.sante.bulletinsante.models.Utilisateur;
 import com.bulletin.sante.bulletinsante.repositories.ProfileRepository;
 import com.bulletin.sante.bulletinsante.services.UtilisateurService;
 import org.springframework.beans.factory.InitializingBean;
@@ -33,7 +35,7 @@ public class BulletinSanteApplication extends SpringBootServletInitializer {
     InitializingBean utilisateur() {
         return () -> {
             try {
-                /*Profile profile = new Profile();
+                Profile profile = new Profile();
                 Utilisateur utilisateur = new Utilisateur();
 
                 profile.setId(1L);
@@ -48,7 +50,7 @@ public class BulletinSanteApplication extends SpringBootServletInitializer {
                 utilisateur.setNom("NDOYE");
                 utilisateur.setPassword("admin@123");
                 utilisateur.setEmail("admin@mail.com");
-                utilisateurService.addUser(utilisateur);*/
+                utilisateurService.addUser(utilisateur);
             } catch (Exception e) {
                 e.printStackTrace();
             }
