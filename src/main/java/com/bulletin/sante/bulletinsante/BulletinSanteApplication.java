@@ -36,11 +36,16 @@ public class BulletinSanteApplication extends SpringBootServletInitializer {
         return () -> {
             try {
                 Profile profile = new Profile();
+                Profile profile2 = new Profile();
                 Utilisateur utilisateur = new Utilisateur();
 
                 profile.setId(1L);
                 profile.setLibelle("Admin");
                 profileRepository.save(profile);
+
+                profile2.setId(2L);
+                profile2.setLibelle("Patient");
+                profileRepository.save(profile2);
 
                 utilisateur.setId(1L);
                 utilisateur.setProfile(profile);
