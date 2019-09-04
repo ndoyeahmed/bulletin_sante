@@ -4,7 +4,7 @@ import com.bulletin.sante.bulletinsante.models.Consultation;
 import com.bulletin.sante.bulletinsante.models.RendezVous;
 import com.bulletin.sante.bulletinsante.services.ConsultationService;
 import com.bulletin.sante.bulletinsante.services.RendezVousService;
-import com.bulletin.sante.bulletinsante.utils.Utils;
+import com.bulletin.sante.bulletinsante.utils.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,8 +57,8 @@ public class ConsultationController {
     public ResponseEntity addConsultation(@RequestBody Consultation consultation) {
         try {
             if (consultationService.addConsultation(consultation)) {
-                return ResponseEntity.ok(Collections.singletonMap(Utils.SUCCESS_CODE, true));
-            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utils.ERROR_CODE, false));
+                return ResponseEntity.ok(Collections.singletonMap(Utility.SUCCESS_CODE, true));
+            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, false));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
@@ -77,8 +77,8 @@ public class ConsultationController {
         try {
             Consultation consultation = consultationService.getConsultationById(id);
             if (consultation != null) {
-                return ResponseEntity.ok(Collections.singletonMap(Utils.SUCCESS_CODE, consultation));
-            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utils.ERROR_CODE, null));
+                return ResponseEntity.ok(Collections.singletonMap(Utility.SUCCESS_CODE, consultation));
+            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, null));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
@@ -112,8 +112,8 @@ public class ConsultationController {
     public ResponseEntity addRendezVous(@RequestBody RendezVous rendezVous) {
         try {
             if (rendezVousService.addRendezVous(rendezVous)) {
-                return ResponseEntity.ok(Collections.singletonMap(Utils.SUCCESS_CODE, true));
-            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utils.ERROR_CODE, false));
+                return ResponseEntity.ok(Collections.singletonMap(Utility.SUCCESS_CODE, true));
+            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, false));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
@@ -132,8 +132,8 @@ public class ConsultationController {
         try {
             RendezVous rendezVous = rendezVousService.getRendezVousById(id);
             if (rendezVous != null) {
-                return ResponseEntity.ok(Collections.singletonMap(Utils.SUCCESS_CODE, rendezVous));
-            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utils.ERROR_CODE, null));
+                return ResponseEntity.ok(Collections.singletonMap(Utility.SUCCESS_CODE, rendezVous));
+            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, null));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();

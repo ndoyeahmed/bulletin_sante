@@ -2,7 +2,7 @@ package com.bulletin.sante.bulletinsante.rest;
 
 import com.bulletin.sante.bulletinsante.models.Patient;
 import com.bulletin.sante.bulletinsante.services.PatientService;
-import com.bulletin.sante.bulletinsante.utils.Utils;
+import com.bulletin.sante.bulletinsante.utils.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +30,9 @@ public class PatientController {
     public ResponseEntity addOrUpdatePatient(@RequestBody Patient patient) {
         try {
             if (patientService.addOrUpdatePatient(patient)) {
-                return ResponseEntity.ok(Collections.singletonMap(Utils.SUCCESS_CODE, true));
+                return ResponseEntity.ok(Collections.singletonMap(Utility.SUCCESS_CODE, true));
             } else {
-                return ResponseEntity.badRequest().body(Collections.singletonMap(Utils.ERROR_CODE, false));
+                return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, false));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,8 +44,8 @@ public class PatientController {
     public ResponseEntity updatePatient(@RequestBody Patient patient) {
         try {
             if (patientService.addOrUpdatePatient(patient)) {
-                return ResponseEntity.ok(Collections.singletonMap(Utils.SUCCESS_CODE, true));
-            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utils.ERROR_CODE, false));
+                return ResponseEntity.ok(Collections.singletonMap(Utility.SUCCESS_CODE, true));
+            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, false));
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
@@ -56,9 +56,9 @@ public class PatientController {
         try {
             Patient patient = patientService.getPatientById(id);
             if (patient != null) {
-                return ResponseEntity.ok(Collections.singletonMap(Utils.SUCCESS_CODE, patient));
+                return ResponseEntity.ok(Collections.singletonMap(Utility.SUCCESS_CODE, patient));
             } else {
-                return ResponseEntity.badRequest().body(Collections.singletonMap(Utils.ERROR_CODE, null));
+                return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, null));
             }
         } catch (Exception e) {
             e.printStackTrace();

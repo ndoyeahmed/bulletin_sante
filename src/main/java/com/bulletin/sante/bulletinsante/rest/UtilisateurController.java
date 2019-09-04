@@ -2,7 +2,7 @@ package com.bulletin.sante.bulletinsante.rest;
 
 import com.bulletin.sante.bulletinsante.models.Utilisateur;
 import com.bulletin.sante.bulletinsante.services.UtilisateurService;
-import com.bulletin.sante.bulletinsante.utils.Utils;
+import com.bulletin.sante.bulletinsante.utils.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +31,7 @@ public class UtilisateurController {
         try {
             return ResponseEntity.ok(utilisateurService.allProfile());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Collections.singletonMap(Utils.ERROR_CODE, null));
+            return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, null));
         }
     }
 
@@ -39,19 +39,19 @@ public class UtilisateurController {
     public ResponseEntity addUser(@RequestBody Utilisateur utilisateur) {
         try {
             if (utilisateurService.addUser(utilisateur)) {
-                return ResponseEntity.ok(Collections.singletonMap(Utils.SUCCESS_CODE, true));
-            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utils.ERROR_CODE, false));
+                return ResponseEntity.ok(Collections.singletonMap(Utility.SUCCESS_CODE, true));
+            } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, false));
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(Utils.ERROR_CODE, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(Utility.ERROR_CODE, HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping("/update-user")
     public ResponseEntity updateUser(@RequestBody Utilisateur utilisateur) {
         if (utilisateurService.updateUser(utilisateur)) {
-            return ResponseEntity.ok(Collections.singletonMap(Utils.SUCCESS_CODE, true));
-        } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utils.ERROR_CODE, false));
+            return ResponseEntity.ok(Collections.singletonMap(Utility.SUCCESS_CODE, true));
+        } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, false));
     }
 
     @PostMapping("/login")
@@ -59,12 +59,12 @@ public class UtilisateurController {
         try {
             Utilisateur utilisateur = utilisateurService.login(userLoginModel.getEmail(), userLoginModel.getPassword());
             if (utilisateur != null)
-                return ResponseEntity.ok(Collections.singletonMap(Utils.SUCCESS_CODE, utilisateur));
+                return ResponseEntity.ok(Collections.singletonMap(Utility.SUCCESS_CODE, utilisateur));
             else
-                return ResponseEntity.badRequest().body(Collections.singletonMap(Utils.ERROR_CODE, HttpStatus.FORBIDDEN));
+                return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, HttpStatus.FORBIDDEN));
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.badRequest().body(Collections.singletonMap(Utils.ERROR_CODE, HttpStatus.BAD_REQUEST));
+            return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, HttpStatus.BAD_REQUEST));
         }
     }
 
@@ -72,8 +72,8 @@ public class UtilisateurController {
     public ResponseEntity getUserById(@PathVariable("id") Long id) {
         Utilisateur utilisateur = utilisateurService.getUserById(id);
         if (utilisateur != null) {
-            return ResponseEntity.ok(Collections.singletonMap(Utils.SUCCESS_CODE, utilisateur));
-        } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utils.ERROR_CODE, null));
+            return ResponseEntity.ok(Collections.singletonMap(Utility.SUCCESS_CODE, utilisateur));
+        } else return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, null));
     }
 
     private static class UserLoginModel {
