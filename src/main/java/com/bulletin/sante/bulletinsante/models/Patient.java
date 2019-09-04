@@ -14,10 +14,6 @@ public class Patient extends Personne implements Serializable {
     private String cin;
     private char genre;
 
-    public Patient() {
-        super();
-    }
-
     public Long getId() {
         return id;
     }

@@ -3,7 +3,7 @@ package com.bulletin.sante.bulletinsante.rest;
 import com.bulletin.sante.bulletinsante.AbstractTest;
 import com.bulletin.sante.bulletinsante.models.Profile;
 import com.bulletin.sante.bulletinsante.models.Utilisateur;
-import com.bulletin.sante.bulletinsante.utils.Utilitaire;
+import com.bulletin.sante.bulletinsante.utils.Utils;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
@@ -82,7 +82,7 @@ public class UtilisateurControllerTest extends AbstractTest {
         int status = mvcResult.getResponse().getStatus();
         assertEquals(200, status);
         String content = mvcResult.getResponse().getContentAsString();
-        assertEquals(super.mapToJson(Collections.singletonMap(Utilitaire.SUCCESS_CODE, true)), content);
+        assertEquals(super.mapToJson(Collections.singletonMap(Utils.SUCCESS_CODE, true)), content);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class UtilisateurControllerTest extends AbstractTest {
         int status = mvcResult.getResponse().getStatus();
         assertEquals(400, status);
         String content = mvcResult.getResponse().getContentAsString();
-        assertEquals(super.mapToJson(Collections.singletonMap(Utilitaire.ERROR_CODE, false)), content);
+        assertEquals(super.mapToJson(Collections.singletonMap(Utils.ERROR_CODE, false)), content);
     }
 
     @Test
@@ -124,7 +124,7 @@ public class UtilisateurControllerTest extends AbstractTest {
         int status = mvcResult.getResponse().getStatus();
         assertEquals(400, status);
         String content = mvcResult.getResponse().getContentAsString();
-        assertEquals(super.mapToJson(Collections.singletonMap(Utilitaire.ERROR_CODE, false)), content);
+        assertEquals(super.mapToJson(Collections.singletonMap(Utils.ERROR_CODE, false)), content);
 
         utilisateur.setId(1L);
         inputJson = super.mapToJson(utilisateur);
@@ -134,6 +134,6 @@ public class UtilisateurControllerTest extends AbstractTest {
         status = mvcResult.getResponse().getStatus();
         assertEquals(200, status);
         content = mvcResult.getResponse().getContentAsString();
-        assertEquals(super.mapToJson(Collections.singletonMap(Utilitaire.SUCCESS_CODE, true)), content);
+        assertEquals(super.mapToJson(Collections.singletonMap(Utils.SUCCESS_CODE, true)), content);
     }
 }

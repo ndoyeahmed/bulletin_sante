@@ -32,24 +32,4 @@ public class UtilisateurServiceTest extends AbstractTest {
         utilisateur = utilisateurService.login(login, pwd);
         assertNotNull(utilisateur);
     }
-
-    @Test
-    public void addUser() {
-    }
-
-    @Test
-    public void allUser() {
-    }
-
-    @Test
-    public void getUserById() {
-    }
-
-    @Test
-    public void updateUser() {
-    }
-
-    @Test
-    public void allProfile() {
-    }
 }

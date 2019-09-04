@@ -15,10 +15,6 @@ public class Utilisateur extends Personne implements Serializable {
     @JoinColumn(name = "profile", referencedColumnName = "id")
     private Profile profile;
 
-    public Utilisateur() {
-        super();
-    }
-
     public Long getId() {
         return id;
     }
