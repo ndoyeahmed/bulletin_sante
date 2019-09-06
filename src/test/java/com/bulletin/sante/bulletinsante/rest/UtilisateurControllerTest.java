@@ -1,16 +1,12 @@
 package com.bulletin.sante.bulletinsante.rest;
 
 import com.bulletin.sante.bulletinsante.AbstractTest;
-import com.bulletin.sante.bulletinsante.models.Profile;
 import com.bulletin.sante.bulletinsante.models.Utilisateur;
-import com.bulletin.sante.bulletinsante.utils.Utility;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -41,7 +37,7 @@ public class UtilisateurControllerTest extends AbstractTest {
         assertEquals(405, state);
     }
 
-    @Test
+   /* @Test
     public void allProfileTest() throws Exception {
         String uri = "/api/all-profile";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
@@ -135,5 +131,5 @@ public class UtilisateurControllerTest extends AbstractTest {
         assertEquals(200, status);
         content = mvcResult.getResponse().getContentAsString();
         assertEquals(super.mapToJson(Collections.singletonMap(Utility.SUCCESS_CODE, true)), content);
-    }
+    }*/
 }

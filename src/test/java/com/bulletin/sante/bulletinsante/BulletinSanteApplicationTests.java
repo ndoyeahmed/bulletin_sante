@@ -15,5 +15,4 @@ public class BulletinSanteApplicationTests {
     public void contextLoads() {
         assertTrue(true);
     }
-
 }
