@@ -67,13 +67,13 @@ public class PatientController {
     }
 
     @GetMapping("/get-patient/{id}")
-    public ResponseEntity patientById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> patientById(@PathVariable("id") Long id) {
         try {
             Patient patient = patientService.getPatientById(id);
             if (patient != null) {
-                return ResponseEntity.ok(Collections.singletonMap(Utility.SUCCESS_CODE, patient));
+                return ResponseEntity.ok(patient);
             } else {
-                return ResponseEntity.badRequest().body(Collections.singletonMap(Utility.ERROR_CODE, null));
+                return ResponseEntity.badRequest().body(null);
             }
         } catch (Exception e) {
             e.printStackTrace();
